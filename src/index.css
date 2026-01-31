@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0.625rem;
+    
+    /* Custom Habit Tracker Colors */
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
+    --info: 217 91% 60%;
+    --purple: 270 60% 55%;
+    --orange: 25 95% 53%;
+    --pink: 330 80% 60%;
+    
+    /* Heatmap Colors */
+    --heatmap-0: 0 0% 95%;
+    --heatmap-1: 142 70% 85%;
+    --heatmap-2: 142 70% 65%;
+    --heatmap-3: 142 76% 45%;
+    --heatmap-4: 142 80% 30%;
+    
+    /* XP Colors */
+    --xp-primary: 45 100% 50%;
+    --xp-secondary: 35 100% 55%;
+    
+    /* Streak Colors */
+    --streak-fire: 15 90% 55%;
+    --streak-gold: 45 100% 50%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 18%;
+    --input: 240 3.7% 18%;
+    --ring: 240 4.9% 83.9%;
+    
+    /* Custom Dark Mode Colors */
+    --success: 142 70% 45%;
+    --warning: 38 90% 55%;
+    --info: 217 90% 65%;
+    --purple: 270 65% 60%;
+    --orange: 25 90% 58%;
+    --pink: 330 75% 65%;
+    
+    /* Heatmap Colors Dark */
+    --heatmap-0: 240 5% 15%;
+    --heatmap-1: 142 60% 25%;
+    --heatmap-2: 142 65% 35%;
+    --heatmap-3: 142 70% 50%;
+    --heatmap-4: 142 75% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer components {
+  /* Progress Ring Animation */
+  .progress-ring-circle {
+    transition: stroke-dashoffset 0.5s ease-in-out;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+  
+  /* Heatmap Cell */
+  .heatmap-cell {
+    @apply rounded-sm transition-all duration-200;
+  }
+  .heatmap-cell:hover {
+    @apply ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+  
+  /* Streak Flame Animation */
+  @keyframes flame {
+    0%, 100% { transform: scale(1) rotate(-2deg); }
+    25% { transform: scale(1.05) rotate(2deg); }
+    50% { transform: scale(1) rotate(-1deg); }
+    75% { transform: scale(1.03) rotate(1deg); }
+  }
+  .streak-flame {
+    animation: flame 1s ease-in-out infinite;
+  }
+  
+  /* Level Up Animation */
+  @keyframes levelUp {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .level-up-animation {
+    animation: levelUp 0.6s ease-out;
+  }
+  
+  /* XP Gain Animation */
+  @keyframes xpFloat {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-30px); opacity: 0; }
+  }
+  .xp-float {
+    animation: xpFloat 1s ease-out forwards;
+  }
+  
+  /* Card Hover Effect */
+  .habit-card {
+    @apply transition-all duration-300;
+  }
+  .habit-card:hover {
+    @apply shadow-lg -translate-y-1;
+  }
+  
+  /* Badge Shine Effect */
+  @keyframes badgeShine {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  .badge-shine {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255,255,255,0.3) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: badgeShine 2s infinite;
+  }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-muted rounded-full;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+  
+  /* Glass Effect */
+  .glass {
+    @apply bg-background/80 backdrop-blur-md border border-border/50;
+  }
+  
+  /* Gradient Text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-500;
+  }
+  
+  /* Glow Effects */
+  .glow-success {
+    box-shadow: 0 0 20px hsl(var(--success) / 0.4);
+  }
+  .glow-warning {
+    box-shadow: 0 0 20px hsl(var(--warning) / 0.4);
+  }
+  .glow-xp {
+    box-shadow: 0 0 20px hsl(var(--xp-primary) / 0.4);
+  }
+}
+
+@layer utilities {
+  /* Category Colors */
+  .category-health { @apply bg-emerald-500/10 text-emerald-600 border-emerald-500/20; }
+  .category-fitness { @apply bg-orange-500/10 text-orange-600 border-orange-500/20; }
+  .category-study { @apply bg-blue-500/10 text-blue-600 border-blue-500/20; }
+  .category-work { @apply bg-purple-500/10 text-purple-600 border-purple-500/20; }
+  .category-mental { @apply bg-pink-500/10 text-pink-600 border-pink-500/20; }
+  .category-productivity { @apply bg-cyan-500/10 text-cyan-600 border-cyan-500/20; }
+  .category-other { @apply bg-gray-500/10 text-gray-600 border-gray-500/20; }
+  
+  /* Difficulty Colors */
+  .difficulty-easy { @apply text-emerald-500; }
+  .difficulty-medium { @apply text-amber-500; }
+  .difficulty-hard { @apply text-rose-500; }
+  
+  /* Animation Delays */
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+}
